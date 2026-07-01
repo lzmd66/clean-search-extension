@@ -1,0 +1,70 @@
+{
+  "manifest_version": 3,
+  "name": "Clean Search - 搜索结果过滤",
+  "version": "1.0.1",
+  "description": "自动过滤搜索结果中的垃圾站、SEO农场、AI水文。基于176K+域名黑名单。",
+  "permissions": [
+    "storage",
+    "webNavigation",
+    "alarms"
+  ],
+  "host_permissions": [
+    "*://*.google.com/*",
+    "*://*.google.com.hk/*",
+    "*://*.bing.com/*",
+    "*://cn.bing.com/*",
+    "*://*.baidu.com/*",
+    "*://duckduckgo.com/*",
+    "*://raw.githubusercontent.com/*",
+    "*://gh-proxy.com/*",
+    "*://pgl.yoyo.org/*",
+    "*://*.smzdm.com/*",
+    "*://*.manmanbuy.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.google.com/search*",
+        "*://www.google.com.hk/search*",
+        "*://www.google.co.jp/search*",
+        "*://www.google.co.uk/search*",
+        "*://www.bing.com/search*",
+        "*://cn.bing.com/search*",
+        "*://www.baidu.com/s*",
+        "*://duckduckgo.com/*",
+        "*://html.duckduckgo.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "blacklist.txt",
+        "whitelist.txt"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ]
+}
